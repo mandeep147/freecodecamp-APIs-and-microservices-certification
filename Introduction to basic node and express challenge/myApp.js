@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 // --> 7)  Mount the Logger middleware here
@@ -9,7 +10,7 @@ app.use(function middleware(req, res, next){
 })
 
 // --> 11)  Mount the body-parser middleware  here
-
+app.use(bodyParser.urlencoded({ extended: false}));
 
 /** 1) Meet the node console. */
 console.log("Hello World");
