@@ -139,10 +139,14 @@ var findPeopleByName = function(personName, done) {
 
 var findOneByFood = function(food, done) {
 
-    done(null/*, data*/);
+    Person.findOne({favoriteFoods: food}, (err, data) => {
+        if (err) {
+            return done(err);
+        }
+        return done(null, data);
+    });
 
 };
-
 /** 7) Use `Model.findById()` */
 
 // When saving a document, mongodb automatically add the field `_id`,
