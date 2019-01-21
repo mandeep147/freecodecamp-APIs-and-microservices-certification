@@ -243,7 +243,7 @@ var findAndUpdate = function (personName, done) {
 
 var removeById = function (personId, done) {
 
-    Person.findOneAndRemove(personId, function(err, data) {
+    Person.findOneAndRemove(personId, function (err, data) {
         if (err) {
             done(err);
         }
@@ -265,7 +265,7 @@ var removeById = function (personId, done) {
 var removeManyPeople = function (done) {
     var nameToRemove = "Mary";
 
-    Person.remove({name: nameToRemove}, function(err, data) {
+    Person.remove({name: nameToRemove}, function (err, data) {
         if (err) {
             done(err);
         }
@@ -294,7 +294,12 @@ var removeManyPeople = function (done) {
 var queryChain = function (done) {
     var foodToSearch = "burrito";
 
-    done(null/*, data*/);
+    Person.find({favoriteFoods: foodToSearch}).sort({name: "asc"}).limit(2).select("-age").exec(function (err, data) {
+        if (err) {
+            done(err);
+        }
+        done(null, data);
+    });
 };
 
 /** **Well Done !!**
